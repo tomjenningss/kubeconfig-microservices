@@ -325,6 +325,19 @@ Now you need to delete your old Kubernetes deployment and update the deployments
 
 `kubectl apply -f kubernetes.yaml`
 
+You should see the following output from the commands:
+```
+$ kubectl delete -f kubernetes.yaml
+deployment.apps "system-deployment" deleted
+deployment.apps "inventory-deployment" deleted
+service "system-service" deleted
+service "inventory-service" deleted
+$ kubectl apply -f kubernetes.yaml
+deployment.apps/system-deployment created
+deployment.apps/inventory-deployment created
+service/system-service created
+service/inventory-service created
+```
 Update the port the nodes that are assigned to and take note:
 
 `kubectl get services`
@@ -343,7 +356,6 @@ Update the IP addresses required to access the services, use the following comma
 
 `kubectl describe pods`
 
-
 Like you did with the node ports, set the **sysIP** **invIP** variables to the right IP addresses for the services:
 
 `sysIP=<IP address>`
@@ -355,20 +367,6 @@ Check that they have been set correctly:
 `echo $sysIP && echo $invIP`
 
 You should see an output consisting of both IP addresses.
-
-You should see the following output from the commands:
-```
-$ kubectl delete -f kubernetes.yaml
-deployment.apps "system-deployment" deleted
-deployment.apps "inventory-deployment" deleted
-service "system-service" deleted
-service "inventory-service" deleted
-$ kubectl apply -f kubernetes.yaml
-deployment.apps/system-deployment created
-deployment.apps/inventory-deployment created
-service/system-service created
-service/inventory-service created
-```
 
 Check the status of the pods for the services with:
 
